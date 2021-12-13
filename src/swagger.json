@@ -1,0 +1,247 @@
+{
+   "openapi": "3.0.0",
+   "info": {
+      "title": "SOLID API - Ignite",
+      "description": "This is a SOLID API",
+      "version": "1.0.0"
+   },
+   "paths": {
+      "/users": {
+         "post": {
+            "tags": ["Users"],
+            "summary": "Create a user",
+            "description": "Add a new user",
+            "requestBody": {
+               "content": {
+                  "application/json": {
+                     "schema": {
+                        "type": "object",
+                        "properties": {
+                           "name": {
+                              "type": "string"
+                           },
+                           "email": {
+                              "type": "string"
+                           }
+                        }
+                     }
+                  }
+               }
+            },
+            "responses":{
+               "201": {
+                  "description": "Created",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "error":{
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "500": {
+                  "description": "User already exists",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "error":{
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         },
+         "get":{
+            "tags": ["Users"],
+            "summary": "List users",
+            "description": "List all users",
+            "parameters": [
+               {
+                  "-in": "query",
+                  "name": "user_id",
+                  "description": "User ID",
+                  "required": "true",
+                  "schema": {
+                     "type": "string",
+                     "format": "uuid"
+                  }
+               }
+            ],
+            "responses":{
+               "200": {
+                  "description": "Success",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "array",
+                           "items": {
+                              "type": "object",
+                              "properties":{
+                                 "id": {
+                                    "type": "string"
+                                 },
+                                 "admin":{
+                                    "type": "boolean"
+                                 },
+                                 "name":{
+                                    "type": "string"
+                                 },
+                                 "email":{
+                                    "type": "string"
+                                 },
+                                 "created_at":{
+                                    "type": "string"
+                                 },
+                                 "updated_at":{
+                                    "type": "string"
+                                 }
+                              }
+                           }
+                           
+                        }
+                     }
+                  }
+               },
+               "400": {
+                  "description": "Bad Request",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "error":{
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "/users/{id}": {
+         "get":{
+            "tags": ["Users"],
+            "summary": "List user by ID",
+            "description": "List an user",
+            "responses":{
+               "200": {
+                  "description": "Success",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "array",
+                           "items": {
+                              "type": "object",
+                              "properties":{
+                                 "id": {
+                                    "type": "string"
+                                 },
+                                 "admin":{
+                                    "type": "boolean"
+                                 },
+                                 "name":{
+                                    "type": "string"
+                                 },
+                                 "email":{
+                                    "type": "string"
+                                 },
+                                 "created_at":{
+                                    "type": "string"
+                                 },
+                                 "updated_at":{
+                                    "type": "string"
+                                 }
+                              }
+                           }
+                           
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Not found",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "error":{
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      },
+      "users/{id}/admin":{
+         "patch": {
+            "tags": ["Users"],
+            "summary": "Turn an User Admin",
+            "description": "Turn an User Admin",
+            "responses":{
+               "200": {
+                  "description": "Success",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "id": {
+                                 "type": "string"
+                              },
+                              "admin":{
+                                 "type": "boolean"
+                              },
+                              "name":{
+                                 "type": "string"
+                              },
+                              "email":{
+                                 "type": "string"
+                              },
+                              "created_at":{
+                                 "type": "string"
+                              },
+                              "updated_at":{
+                                 "type": "string"
+                              }
+                           }
+                           
+                        }
+                     }
+                  }
+               },
+               "404": {
+                  "description": "Not found",
+                  "content":{
+                     "application/json":{
+                        "schema":{
+                           "type": "object",
+                           "properties":{
+                              "error":{
+                                 "type": "string"
+                              }
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+         }
+      }
+   }
+}
